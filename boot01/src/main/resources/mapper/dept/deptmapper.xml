@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.dept.mapper.DeptMapper">
+
+<select id="selectDeptAll" resultType="DeptVO">
+	select department_id,
+			department_name,
+			manager_id,
+			location_id
+	from 	departments
+	order by department_id
+			
+</select>
+
+<select id="findDept" resultType="DeptVO">
+	select department_id,
+			department_name,
+			manager_id,
+			location_id
+	from 	departments
+	where 	department_id = #{departmentId}
+	order by department_id
+</select>
+
+<insert id="deptInsert" parameterType="deptVO">
+	INSERT INTO departments(
+							department_id
+							, department_name
+							, manager_id
+							, location_id	)
+	VALUES (
+			#{departmentId}
+			,#{departmentName}
+			,#{managerId}
+			,#{locationId})
+</insert>
+
+<update id="updateDept">
+	UPDATE departments
+	SET 
+			department_name = #{dept.departmentName}
+			, manager_id = #{dept.managerId}
+			, location_id = #{dept.locationId}
+	WHERE department_id = #{did}
+</update>
+		
+		
+		
+
+<delete id="deleteDept" parameterType="int">
+		DELETE FROM departments
+		WHERE department_id = #{deptId}
+</delete>
+
+</mapper>
